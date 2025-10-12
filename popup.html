@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IP Info</title>
+
+  <!-- Metadata for Chrome Web Store & SEO -->
+  <meta name="description" content="Quickly view your public IP address, location, ISP, and timezone. Powered by ipapi.co." />
+  <meta name="theme-color" content="#1a73e8" />
+  <meta name="author" content="Your Extension Name" />
+
+  <!-- Manifest & Icons -->
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" sizes="48x48" href="icons/icon48.png" />
+  <link rel="stylesheet" href="popup.css" />
+
+  <!-- Preload icon for faster render -->
+  <link rel="preload" as="image" href="icons/icon48.png" />
+</head>
+
+<body>
+  <div class="container" role="main">
+    <header class="header">
+      <img src="icons/icon48.png" alt="IP Info Icon" width="48" height="48" />
+      <h1>My IP Information</h1>
+    </header>
+
+    <!-- Loading State -->
+    <div id="loading" class="loading" aria-live="polite">Fetching IP info…</div>
+
+    <!-- IP Information -->
+    <section id="info" class="info" hidden aria-live="polite">
+      <div class="row"><span class="label">My IP Address is:</span> <span id="ip" class="value"></span> <button id="copyIp" class="small" aria-label="Copy IP address">Copy</button></div>
+      <div class="row"><span class="label">Version:</span> <span id="version" class="value"></span></div>
+      <div class="row"><span class="label">City:</span> <span id="city" class="value"></span></div>
+      <div class="row"><span class="label">Region:</span> <span id="region" class="value"></span></div>
+      <div class="row"><span class="label">Country:</span> <span id="country" class="value"></span></div>
+      <div class="row"><span class="label">Postal:</span> <span id="postal" class="value"></span></div>
+      <div class="row"><span class="label">Location:</span> <span id="loc" class="value"></span></div>
+      <div class="row"><span class="label">Org / ISP:</span> <span id="org" class="value"></span></div>
+      <div class="row"><span class="label">Timezone:</span> <span id="timezone" class="value"></span></div>
+    </section>
+
+    <!-- Error Message -->
+    <div id="error" class="error" hidden role="alert"></div>
+
+    <footer class="footer">
+      <button id="refresh" class="primary" type="button" aria-label="Refresh IP info"> Refresh</button>
+      <small>
+        Data from 
+        <a id="apiLink" href="https://ipapi.co" target="_blank" rel="noopener noreferrer">ipapi.co</a>
+      </small>
+    </footer>
+    <small>  Powered By Rohan Ravindra Kadam. Made in India 💖 </small>
+
+  </div>
+
+  <!-- Defer script loading for better performance -->
+  <script src="popup.js" defer></script>
+</body>
+</html>
