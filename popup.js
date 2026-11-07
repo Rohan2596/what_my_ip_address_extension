@@ -2,7 +2,7 @@
 
 const ENDPOINTS = {
   v4: 'https://api.ipify.org?format=json',
-  v6: 'https://api6.ipify.org?format=json',
+  v6: 'https://api64.ipify.org?format=json',
   any: 'https://api64.ipify.org?format=json', // whichever protocol this browser prefers
 };
 
