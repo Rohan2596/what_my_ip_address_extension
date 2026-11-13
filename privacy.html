@@ -113,7 +113,7 @@
       The extension uses the following Chrome permissions, as declared in the manifest:
     </p>
     <ul>
-      <li><strong>storage</strong> – used only to cache the last IP lookup result locally for faster loading, and to keep a simple on-device counter of lookups so the extension knows when to offer a one-time rating reminder. Neither is sent anywhere.</li>
+      <li><strong>storage</strong> – used only to cache the last IP lookup result locally for faster loading, to keep a simple on-device counter of lookups so the extension knows when to offer a one-time rating reminder, and (in the popup's own local storage) to remember your light/dark theme choice. Neither is sent anywhere.</li>
       <li><strong>host_permissions</strong> – limited to <code>https://ipapi.co/json/</code> and <code>https://ipinfo.io/json</code>. The ipify requests (api.ipify.org, api6.ipify.org, api64.ipify.org) are plain cross-origin requests and need no additional permission.</li>
     </ul>
 

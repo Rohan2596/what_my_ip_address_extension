@@ -2,7 +2,7 @@
 
 const ENDPOINTS = {
   v4: 'https://api.ipify.org?format=json',
-  v6: 'https://api64.ipify.org?format=json',
+  v6: 'https://api6.ipify.org?format=json',
   any: 'https://api64.ipify.org?format=json', // whichever protocol this browser prefers
 };
 
@@ -112,6 +112,44 @@ function render(data) {
 function setError(msg) {
   $('error').hidden = !msg;
   $('error').textContent = msg || '';
+}
+
+/* ---------- Theme (System -> Light -> Dark) ---------- */
+
+const THEME_CYCLE = ['system', 'light', 'dark'];
+const THEME_ICON = { system: '🖥️', light: '☀️', dark: '🌙' };
+const THEME_NAME = { system: 'System', light: 'Light', dark: 'Dark' };
+
+function getTheme() {
+  try {
+    const t = localStorage.getItem('theme');
+    return t === 'light' || t === 'dark' ? t : 'system';
+  } catch (e) {
+    return 'system';
+  }
+}
+
+function applyTheme(theme) {
+  const root = document.documentElement;
+  if (theme === 'system') delete root.dataset.theme;
+  else root.dataset.theme = theme;
+
+  const btn = $('themeToggle');
+  btn.textContent = THEME_ICON[theme];
+  btn.setAttribute('aria-label', `Theme: ${THEME_NAME[theme]}`);
+  btn.title = `Theme: ${THEME_NAME[theme]} (click to change)`;
+}
+
+function initTheme() {
+  applyTheme(getTheme());
+  $('themeToggle').addEventListener('click', () => {
+    const next = THEME_CYCLE[(THEME_CYCLE.indexOf(getTheme()) + 1) % THEME_CYCLE.length];
+    try {
+      if (next === 'system') localStorage.removeItem('theme');
+      else localStorage.setItem('theme', next);
+    } catch (e) { /* ignore */ }
+    applyTheme(next);
+  });
 }
 
 /* ---------- Copy ---------- */
@@ -271,6 +309,7 @@ async function refresh() {
 }
 
 async function init() {
+  initTheme();
   initCopy();
   $('refresh').addEventListener('click', refresh);
 

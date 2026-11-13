@@ -1,25 +1,43 @@
 :root {
+  color-scheme: light;
   --bg: #ffffff;
   --card: #f6f8fb;
   --text: #111111;
   --muted: #666666;
   --accent: #1a73e8;
+  --on-accent: #ffffff;
   --danger: #d93025;
   --border: #e6e6e6;
   --radius: 8px;
   --transition: 0.2s ease-in-out;
 }
 
+/* Theme = System (default): follow the OS / Chrome setting */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
     --bg: #121212;
     --card: #1c1e22;
     --text: #eaeaea;
     --muted: #aaaaaa;
     --accent: #8ab4f8;
+    --on-accent: #111111;
     --danger: #ff6b6b;
     --border: #333333;
   }
+}
+
+/* Theme = Dark: forced from the toggle */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #121212;
+  --card: #1c1e22;
+  --text: #eaeaea;
+  --muted: #aaaaaa;
+  --accent: #8ab4f8;
+  --on-accent: #111111;
+  --danger: #ff6b6b;
+  --border: #333333;
 }
 
 body {
@@ -36,6 +54,19 @@ body {
 header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
 header img { width: 36px; height: 36px; border-radius: var(--radius); }
 header h1 { font-size: 16px; font-weight: 600; margin: 0; }
+.theme-toggle {
+  margin-left: auto;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+}
+.theme-toggle:hover { border-color: var(--accent); }
 
 .loading { color: var(--muted); margin: 8px 0; font-size: 13px; }
 
@@ -89,11 +120,10 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outlin
 .small:hover { background: rgba(128, 128, 128, 0.15); }
 .small:disabled { color: var(--muted); cursor: default; }
 
-.primary { background: var(--accent); color: #fff; padding: 8px 14px; cursor: pointer; font-weight: 500; }
+.primary { background: var(--accent); color: var(--on-accent); padding: 8px 14px; cursor: pointer; font-weight: 500; }
 .primary:hover { background: color-mix(in srgb, var(--accent) 90%, #000); }
 .primary:active { transform: scale(0.97); }
 .primary:disabled { opacity: 0.6; cursor: default; }
-@media (prefers-color-scheme: dark) { .primary { color: #111; } }
 
 /* Rating prompt */
 .rate {
@@ -109,13 +139,12 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outlin
 .rate-actions .small { margin-left: 0; align-self: center; color: var(--muted); }
 .primary-link {
   background: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
   padding: 6px 12px;
   border-radius: var(--radius);
   font-size: 13px;
   font-weight: 500;
 }
-@media (prefers-color-scheme: dark) { .primary-link { color: #111; } }
 
 footer { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; font-size: 12px; color: var(--muted); }
 .credit { display: block; margin-top: 8px; color: var(--muted); font-size: 11px; line-height: 1.5; }

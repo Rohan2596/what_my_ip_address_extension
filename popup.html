@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>My IP Information</title>
   <link rel="stylesheet" href="popup.css" />
+  <!-- Applies the saved theme before first paint (no flash) -->
+  <script src="theme.js"></script>
 </head>
 
 <body>
@@ -12,6 +14,7 @@
     <header>
       <img src="icons/icon48.png" alt="" width="36" height="36" />
       <h1>My IP Information</h1>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Theme: System" title="Theme: System (click to change)">🖥️</button>
     </header>
 
     <div id="loading" class="loading" aria-live="polite">Fetching IP info…</div>
